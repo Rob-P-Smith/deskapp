@@ -13,4 +13,11 @@ contextBridge.exposeInMainWorld("api", {
       ipcRenderer.on(channel, (event, ...args) => func(...args));
     }
   },
+  invoke: (channel, data) => {
+    const validChannels = ["save-file", "load-file", "get-recent-files"];
+    if (validChannels.includes(channel)) {
+      return ipcRenderer.invoke(channel, data);
+    }
+    return Promise.reject(new Error(`Invalid channel: ${channel}`));
+  },
 });

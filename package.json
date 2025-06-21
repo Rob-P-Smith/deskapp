@@ -7,26 +7,62 @@
   "scripts": {
     "dev": "node devStartup.js",
     "build": "vite build",
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "npm run build && electron-builder",
+    "pack": "npm run build && electron-builder --dir"
   },
   "author": "Rob",
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^24.0.3",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.5.2",
-    "electron": "^36.5.0",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.5",
-    "vite-plugin-electron": "^0.29.0"
+  "build": {
+    "appId": "com.rob.deskapp",
+    "productName": "Desktop Application",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "sign": false,
+      "verifyUpdateCodeSignature": false
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "dependencies": {
-    "@lexical/react": "^0.32.1",
-    "@tanstack/react-query": "^5.81.0",
-    "@tanstack/react-query-devtools": "^5.81.0",
-    "lexical": "^0.32.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@fluentui/react": "^8.123.0",
+    "@fluentui/react-icons": "^2.0.304",
+    "@lexical/react": "~0.32.1",
+    "@tanstack/react-query": "~5.81.0",
+    "@tanstack/react-query-devtools": "~5.81.0",
+    "lexical": "~0.32.1",
+    "react": "~18.3.1",
+    "react-dom": "~18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "~22.0.0",
+    "@types/react": "~18.3.12",
+    "@types/react-dom": "~18.3.1",
+    "@vitejs/plugin-react": "~4.5.2",
+    "electron": "~32.0.0",
+    "electron-builder": "~25.1.8",
+    "typescript": "~5.8.3",
+    "vite": "~6.3.5",
+    "vite-plugin-electron": "~0.29.0"
   }
 }
