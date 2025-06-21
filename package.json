@@ -5,9 +5,9 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node devStartup.js",
     "build": "vite build",
-    "start": "npm run build && electron ."
+    "start": "electron ."
   },
   "author": "Rob",
   "license": "MIT",

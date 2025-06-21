@@ -1,15 +1,16 @@
+// 
+
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// ES modules don't have __dirname, so we need to recreate it
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -18,9 +19,11 @@ const createWindow = () => {
   });
 
   if (process.env.NODE_ENV === "development") {
+    // Development: load from Vite dev server
     mainWindow.loadURL("http://localhost:5173");
     mainWindow.webContents.openDevTools();
   } else {
+    // Production: load built files
     mainWindow.loadFile(path.join(__dirname, "dist/index.html"));
   }
 };
