@@ -2,7 +2,7 @@
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -10,5 +10,5 @@
     "strict": true,
     "outDir": "dist"
   },
-  "include": ["main.ts", "electron/**/*.ts"]
+  "include": ["main.js", "electron/**/*.ts"]
 }

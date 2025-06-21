@@ -4,31 +4,21 @@ import electron from "vite-plugin-electron";
 import { resolve } from "path";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    electron({
-      entry: "main.js",
-      vite: {
-        build: {
-          outDir: "dist-electron",
-          sourcemap: process.env.NODE_ENV === "development",
-        },
-      },
-    }),
-  ],
+  plugins: [react()],
+  root: "./src",
   base: "./",
   build: {
-    outDir: "dist",
+    outDir: "../dist",
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "src/index.html"),
+        main: resolve(__dirname, "./src/index.html"),
       },
     },
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src/core"),
+      "@": resolve(__dirname, "./src"),
       "@views": resolve(__dirname, "./src/core/views"),
     },
   },
