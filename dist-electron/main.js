@@ -1,11 +1,8 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
-
-// ES modules don't have __dirname, so we need to recreate it
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -13,10 +10,9 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: path.join(__dirname, "preload.cjs"),
-    },
+      preload: path.join(__dirname, "preload.cjs")
+    }
   });
-
   if (process.env.NODE_ENV === "development") {
     mainWindow.loadURL("http://localhost:5173");
     mainWindow.webContents.openDevTools();
@@ -24,17 +20,15 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(__dirname, "dist/index.html"));
   }
 };
-
 app.whenReady().then(() => {
   createWindow();
-
-  app.on("activate", function () {
+  app.on("activate", function() {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
-
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
+//# sourceMappingURL=main.js.map
