@@ -4,7 +4,8 @@
   "description": "A simple desktop app exploration",
   "main": "main.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "electron ."    
   },
   "author": "Rob",
   "license": "MIT",
