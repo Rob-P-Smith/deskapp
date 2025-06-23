@@ -14,7 +14,15 @@ contextBridge.exposeInMainWorld("api", {
     }
   },
   invoke: (channel, data) => {
-    const validChannels = ["save-file", "load-file", "get-recent-files"];
+    const validChannels = [
+      "save-file",
+      "load-file",
+      "get-recent-files",
+      "get-app-config",
+      "window-minimize",
+      "window-maximize",
+      "window-close",
+    ];
     if (validChannels.includes(channel)) {
       return ipcRenderer.invoke(channel, data);
     }

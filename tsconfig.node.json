@@ -10,5 +10,10 @@
     "strict": true,
     "outDir": "dist"
   },
-  "include": ["main.js", "electron/**/*.ts", "**/*.ts", "**/*.js"]
+  "include": [
+    "platforms/electron/main/main.js",
+    "electron/**/*.ts",
+    "**/*.ts",
+    "**/*.js"
+  ]
 }

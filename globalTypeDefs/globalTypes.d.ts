@@ -10,7 +10,12 @@ interface ImportMetaEnv {
   readonly PROD: boolean;
   readonly DEV: boolean;
   readonly SSR: boolean;
+  readonly VITE_SERVER_URL?: string;
   [key: string]: any;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }
 
 declare global {

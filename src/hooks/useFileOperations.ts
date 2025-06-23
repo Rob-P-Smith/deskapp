@@ -1,6 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "../core/modules/api";
 
+export interface AppConfig {
+  name: string;
+  version: string;
+  serverUrl: string;
+}
+
 export const useLoadFile = (filepath: string | null) => {
   return useQuery({
     queryKey: ["file", filepath],
@@ -32,5 +38,15 @@ export const useRecentFiles = () => {
     queryKey: ["recent-files"],
     queryFn: () => apiClient.getRecentFiles(),
     staleTime: 5 * 60 * 1000,
+  });
+};
+
+export const useAppConfig = () => {
+  return useQuery({
+    queryKey: ["appinfo"],
+    queryFn: async (): Promise<AppConfig> => {
+      return await window.api?.invoke("get-app-config");
+    },
+    staleTime: Infinity,
   });
 };

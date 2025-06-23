@@ -1,25 +1,40 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Layout from "../viewComponents/layout/layout";
+import { FluentProvider, webLightTheme } from "@fluentui/react-components";
+import { useAppConfig } from "@hooks/useFileOperations";
+import MenuBar from "@ui/viewComponents/menuBar/menuBar";
+import Layout from "@ui/viewComponents/layout/layout";
+import Help from "@ui/views/help/help";
+import "./app.css";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
-function App() {
+const AppContent = () => {
+  const { data: _appConfig, isLoading } = useAppConfig();
+
+  if (isLoading) {
+    return <div>Loading application...</div>;
+  }
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <h3>h3 from app.tsx</h3>
-      <Layout />
-      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
-    </QueryClientProvider>
+    <div className="app-container">
+      <MenuBar />
+      <div className="content-wrapper">
+        <Layout>
+          <Help />
+        </Layout>
+      </div>
+    </div>
   );
-}
+};
+
+const App = () => {
+  return (
+    <FluentProvider theme={webLightTheme}>
+      <QueryClientProvider client={queryClient}>
+        <AppContent />
+      </QueryClientProvider>
+    </FluentProvider>
+  );
+};
 
 export default App;

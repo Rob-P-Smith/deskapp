@@ -19,17 +19,20 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/core/*"]
+      "@/*": ["./src/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@core/*": ["./src/core/*"],
+      "@hooks/*": ["./src/hooks/*"]
     },
     "typeRoots": ["./node_modules/@types", "./globalTypeDefs"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "main.js",
+    "platforms/electron/main/main.js",
     "globalTypeDefs/**/*.ts",
     "globalTypeDefs/**/*.d.ts",
-    "preload.cjs"
+    "platforms/electron/preload/preload.cjs"
   ],
   "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]

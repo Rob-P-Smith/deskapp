@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, "../../../");
 
 function detectTerminal() {
   const term = process.env.TERM;
@@ -32,8 +33,9 @@ function spawnElectron(terminalType, cwd, env) {
       });
 
     case "MINGW64":
-      return spawn("cmd.exe", ["/c", "npx", "electron", "."], {
+      return spawn("npx", ["electron", "."], {
         stdio: "inherit",
+        shell: true,
         cwd: cwd,
         env: env,
       });
@@ -53,13 +55,7 @@ function spawnElectron(terminalType, cwd, env) {
 async function startDev() {
   console.log("Starting Vite dev server...");
   const server = await createServer({
-    root: "src",
-    base: "./",
-    resolve: {
-      alias: {
-        "@": "/src",
-      },
-    },
+    configFile: path.join(projectRoot, "vite.config.ts"),
   });
 
   await server.listen(5173);
@@ -70,7 +66,7 @@ async function startDev() {
   console.log(`Detected terminal: ${terminalType}`);
   console.log("Starting Electron...");
 
-  const electronProcess = spawnElectron(terminalType, __dirname, {
+  const electronProcess = spawnElectron(terminalType, projectRoot, {
     ...process.env,
     NODE_ENV: "development",
   });

@@ -1,0 +1,20 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-app-region: drag;
+}
+
+.app-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 4px 0px 0px 5px;
+  color: var(--colorNeutralForeground1);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.toolbar button {
+  margin: 4px 5px 0px 0px;
+  -webkit-app-region: no-drag;
+}
